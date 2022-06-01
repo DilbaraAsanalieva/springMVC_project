@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>update group</title>
+</head>
+<body>
+<form action="#"
+      th:action="@{/api/group/{id}(id=${group.id})}"
+      th:method="PATCH"
+      th:object="${group}">
+
+
+    <label for="name">name</label>
+    <input id="name" th:field="${group.groupName}" placeholder="name">
+    <br/><br>
+
+    <label for="address2">start date</label>
+    <div>
+        <input id="address2" type="date" th:field="${group.dateOfStart}">
+    </div>
+    <br><br>
+
+    <label for="address">end date</label>
+    <div>
+        <input id="address" type="date" th:field="${group.dateOfFinish}">
+    </div>
+    <br><br>
+
+
+    <input type="submit" value="update"/>
+
+</form>
+<div>
+    <a th:href="@{/api/group}">
+        <button>go back</button>
+    </a>
+</div>
+</body>
+</html>

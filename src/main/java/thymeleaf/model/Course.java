@@ -8,7 +8,6 @@ import javax.persistence.*;
 
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 @Entity
 @Setter@Getter
@@ -17,7 +16,7 @@ public class Course {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    private Long id;
     private String courseName;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date duration;
@@ -31,7 +30,7 @@ public class Course {
     @ManyToMany(mappedBy = "courses")
     private List<Group> group;
 
-    public Course(UUID id, String courseName, Date duration) {
+    public Course(Long id, String courseName, Date duration) {
         this.id = id;
         this.courseName = courseName;
         this.duration = duration;

@@ -2,11 +2,11 @@ package thymeleaf.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 @Entity
 @Setter@Getter
@@ -15,9 +15,11 @@ public class Group {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    private Long id;
     private String groupName;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateOfStart;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateOfFinish;
     @ManyToMany
     private List<Course> courses;

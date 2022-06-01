@@ -2,10 +2,8 @@ package thymeleaf.model;
 
 import lombok.Getter;
 import lombok.Setter;
-import thymeleaf.model.Course;
 
 import javax.persistence.*;
-import java.util.UUID;
 
 @Entity
 @Setter@Getter
@@ -13,7 +11,7 @@ import java.util.UUID;
 public class Teacher {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-   private UUID id;
+   private Long id;
    private String firstName;
    private String email;
    private String lastName;

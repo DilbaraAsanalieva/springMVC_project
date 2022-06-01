@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Show Page</title>
+
+</head>
+<body>
+<p th:text="${teacher.getFirstName()}">VALUE</p>
+<p th:text="${teacher.getLastName()}">VALUE</p>
+<p th:text="${teacher.getEmail()}">VALUE</p>
+<p th:text="${teacher.getId()}">VALUE</p>
+
+<div>
+    <a th:href="@{/api/teacher}">
+        <button>go back</button>
+    </a>
+</div>
+
+</body>
+</html>

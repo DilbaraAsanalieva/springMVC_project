@@ -47,11 +47,12 @@
             height: 40px;
             text-align: center;
             border-radius: 10px;
-            font-size: 20px;
+            font-size: 15px;
             background-color: #268DCC;
             transition: 1s;
             outline: none;
             border: none;
+            margin-top: 30px;
         }
 
         button:hover {
@@ -74,7 +75,29 @@
     <br/>
     <a th:href="@{/api/courses}">
         <button class="button">
-            go to project
+            go to courses
+        </button>
+    </a>
+    <a th:href="@{/api/company}">
+        <button class="button">
+            go to companies
+        </button>
+    </a>
+
+    <a th:href="@{/api/group}">
+        <button class="button">
+            go to groups
+        </button>
+    </a>
+    <a th:href="@{/api/student}">
+        <button class="button">
+            go to students
+        </button>
+    </a>
+
+    <a th:href="@{/api/teacher}">
+        <button class="button">
+            go to teachers
         </button>
     </a>
 </div>

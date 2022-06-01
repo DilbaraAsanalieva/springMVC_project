@@ -1,10 +1,15 @@
 <!DOCTYPE html>
-<html  lang="en" xmlns="http://www.w3.org/1999/xhtml"
-       xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:c="http://java.sun.com/xml/ns/javaee">
 <head>
     <meta charset="UTF-8">
     <title>courses</title>
 </head>
+<style>
+    .update{
+        margin-left: 70px;
+    }
+</style>
 <body>
 <table>
     <thead>
@@ -13,6 +18,7 @@
         <th>name</th>
         <br>
         <th>duration</th>
+        <th>operations</th>
     </thead>
     <tbody>
     <tr th:each="course : ${allCourse}">
@@ -20,10 +26,18 @@
         <td th:text="${course.courseName}"></td>
         <td th:text="${course.duration}"></td>
         <td>
-            <a th:href="@{'/api/students/find/by/' + ${course.id}}">
-                <button>delete</button>
-                <button>update</button>
+            <a th:href="@{'/api/courses/find/by/' + ${course.id}}">
+                <button><a href="https://google.com" >students</a></button>
             </a>
+            <a th:href="@{'/api/courses/delete/' + ${course.id}}">
+
+                <button>delete</button>
+            </a>
+            <a th:href="@{'/api/courses/'+ ${course.id}+'/edit'}">
+                <button>update </button>
+            </a>
+
+
         </td>
     </tr>
     </tbody>

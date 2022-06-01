@@ -4,7 +4,6 @@ import org.springframework.stereotype.Repository;
 import thymeleaf.model.Course;
 
 import javax.persistence.EntityManager;
-//import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
@@ -15,6 +14,7 @@ public class CourseRepository {
 
     @PersistenceContext
     private EntityManager entityManager;
+    private EntityManagerFactory entityManagerFactory;
 
 //    public CourseRepository(EntityManagerFactory entityManager) {
 //        this.entityManager = entityManager.createEntityManager();
@@ -34,4 +34,19 @@ public class CourseRepository {
 //        entityManager.getTransaction().commit();
     }
 
-}
+    public void deleteById(Long courseId) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+        Course course = entityManager.find(Course.class, courseId);
+        entityManager.remove(course);
+        entityManager.getTransaction().commit();
+        entityManager.close();
+    }
+
+    public Course findById(long courseId){
+        return entityManager.find(Course.class,courseId);
+    }
+
+
+
+    }

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Show Page</title>
+
+</head>
+<body>
+<p th:text="${course.getCourseName()}">VALUE</p>
+<p th:text="${course.getDuration()}">VALUE</p>
+<p th:text="${course.getId()}">VALUE</p>
+
+<div>
+    <a th:href="@{/api/courses}">
+        <button>go back</button>
+    </a>
+</div>
+
+</body>
+</html>

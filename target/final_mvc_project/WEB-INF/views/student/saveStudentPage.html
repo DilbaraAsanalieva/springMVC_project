@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>save new student</title>
+</head>
+<body>
+<form action="#"
+      th:action="@{/api/student/save}"
+      method="post"
+      th:object="${emptyStudent}">
+
+    <label for="name">name</label>
+    <input id="name" th:field="${emptyStudent.firstName}" placeholder="student name">
+    <br><br>
+
+    <label for="address">lastname</label>
+    <input id="address" type="text" th:field="${emptyStudent.lastName}">
+    <br><br>
+
+    <label for="address2">email</label>
+    <input id="address2" type="email" th:field="${emptyStudent.email}">
+    <br><br>
+
+    <input type="radio" value="ONLINE" th:field="*{studyFormat}" id="onlineFormat">
+    <label for="onlineFormat">online</label>
+    <input type="radio" value="OFFLINE" th:field="*{studyFormat}" id="offlineFormat">
+    <label for="offlineFormat">offline</label>
+    <br><br>
+
+    <button type="submit">save</button>
+</form>
+
+<div>
+    <a th:href="@{/api/student}">
+        <button>go back</button>
+    </a>
+</div>
+</body>
+</html>

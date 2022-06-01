@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:c="http://java.sun.com/xml/ns/javaee">
+<head>
+    <meta charset="UTF-8">
+    <title>teachers</title>
+</head>
+
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>name</th>
+        <th>duration</th>
+        <th>operations</th>
+    </thead>
+    <tbody>
+    <tr th:each="teacher : ${allTeachers}">
+        <td th:text="${teacher.id}"></td>
+        <td th:text="${teacher.firstName}"></td>
+        <td th:text="${teacher.lastName}"></td>
+        <td th:text="${teacher.email}"></td>
+        <td>
+            <a th:href="@{'/api/teacher/delete/' + ${teacher.id}}">
+                <button>delete</button>
+            </a>
+            <a th:href="@{'/api/teacher/'+ ${teacher.id}+'/edit'}">
+                <button>update </button>
+            </a>
+
+
+        </td>
+    </tr>
+    </tbody>
+</table>
+<div>
+    <a th:href="@{/api/teacher/save}">
+        <button>
+            save
+        </button>
+    </a>
+</div>
+
+<div>
+    <a th:href="@{/api/teacher}">
+        <button>go back</button>
+    </a>
+</div>
+</body>
+</html>

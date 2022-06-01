@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>update student</title>
+</head>
+<body>
+<form action="#"
+      th:action="@{/api/student/{id}(id=${student.id})}"
+      th:method="PATCH"
+      th:object="${student}">
+
+
+    <label for="name">first name</label>
+    <input id="name" th:field="${student.firstName}" placeholder="name">
+    <br/><br>
+
+    <label for="address2">last name</label>
+    <div>
+        <input id="address2" type="text" th:field="${student.lastName}">
+    </div>
+    <br><br>
+
+    <label for="address">email</label>
+    <div>
+        <input id="address" type="email" th:field="${student.email}">
+    </div>
+    <br><br>
+
+    <input type="radio" value="ONLINE" th:field="*{studyFormat}" id="onlineFormat">
+    <label for="onlineFormat">online</label>
+    <input type="radio" value="OFFLINE" th:field="*{studyFormat}" id="offlineFormat">
+    <label for="offlineFormat">offline</label>
+    <br><br>
+
+
+    <input type="submit" value="update"/>
+
+</form>
+<div>
+    <a th:href="@{/api/student}">
+        <button>go back</button>
+    </a>
+</div>
+</body>
+</html>

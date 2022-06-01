@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:c="http://java.sun.com/xml/ns/javaee">
+<head>
+    <meta charset="UTF-8">
+    <title>groups</title>
+</head>
+
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>name</th>
+        <th>duration</th>
+        <th>operations</th>
+    </thead>
+    <tbody>
+    <tr th:each="group : ${allGroups}">
+        <td th:text="${group.id}"></td>
+        <td th:text="${group.groupName}"></td>
+        <td th:text="${group.dateOfStart}"></td>
+        <td th:text="${group.dateOfFinish}"></td>
+        <td>
+            <a th:href="@{'/api/group/delete/' + ${group.id}}">
+                <button>delete</button>
+            </a>
+            <a th:href="@{'/api/group/'+ ${group.id}+'/edit'}">
+                <button>update </button>
+            </a>
+
+
+        </td>
+    </tr>
+    </tbody>
+</table>
+<div>
+    <a th:href="@{/api/group/save}">
+        <button>
+            save
+        </button>
+    </a>
+</div>
+</body>
+</html>
