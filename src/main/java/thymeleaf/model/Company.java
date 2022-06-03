@@ -16,6 +16,9 @@ public class Company {
     private Long id;
     private String companyName;
     private String locatedCountry;
-    @OneToMany
+    @OneToMany(mappedBy = "company", cascade = CascadeType.MERGE)
     private List<Course> courses;
+    public void setCourse(Course course){
+        this.courses.add(course);
+    }
 }

@@ -3,6 +3,7 @@ package thymeleaf.repositories;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import thymeleaf.model.Company;
+import thymeleaf.model.Course;
 
 import javax.persistence.EntityManager;
 //import javax.persistence.EntityManagerFactory;
@@ -30,6 +31,10 @@ public class CompanyRepository {
         entityManager.persist(company);
 //        entityManager.getTransaction().commit();
 //        entityManager.close();
+    }
+
+    public Company findById(long companyId){
+        return entityManager.find(Company.class,companyId);
     }
 
 }

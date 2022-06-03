@@ -19,12 +19,14 @@
         <br>
         <th>duration</th>
         <th>operations</th>
+        <th>company</th>
     </thead>
     <tbody>
     <tr th:each="course : ${allCourse}">
         <td th:text="${course.id}"></td>
         <td th:text="${course.courseName}"></td>
         <td th:text="${course.duration}"></td>
+        <td th:text="${course.getCompany()}"></td>
         <td>
             <a th:href="@{'/api/courses/find/by/' + ${course.id}}">
                 <button><a href="https://google.com" >students</a></button>
@@ -37,6 +39,10 @@
                 <button>update </button>
             </a>
 
+
+            <a th:href="@{'/api/company/save/'}">
+                <button>add company </button>
+            </a>
 
         </td>
     </tr>

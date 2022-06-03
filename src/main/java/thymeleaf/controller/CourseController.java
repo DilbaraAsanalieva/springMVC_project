@@ -3,7 +3,11 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import thymeleaf.model.Company;
 import thymeleaf.model.Course;
+import thymeleaf.repositories.CompanyRepository;
+import thymeleaf.repositories.CourseRepository;
+import thymeleaf.service.CompanyService;
 import thymeleaf.service.CourseService;
 
 import java.util.List;
@@ -14,6 +18,9 @@ import java.util.List;
 public class CourseController {
 
     private final CourseService courseService;
+    private final CompanyService companyService;
+    private final CourseRepository courseRepository;
+    private final CompanyRepository companyRepository;
 
     @ModelAttribute("/courseList")
     public List<Course> findAllCourses() {
@@ -32,6 +39,7 @@ public class CourseController {
 
         model.addAttribute(
                 "emptyCourse", new Course());
+
 
         return "course/saveCoursePage";
     }
@@ -71,6 +79,25 @@ public class CourseController {
         courseService.update(id,course);
         return "redirect:/api/courses";
     }
+
+    @ModelAttribute("companyList")
+    public List<Company> findAllCompanies(){
+        return companyService.findAllCompanies();
+    }
+
+//
+//    @PostMapping("/{courseId}/courses/{companyId}")
+//    Course assignCompanyToCourse(
+//            @PathVariable Long courseId,
+//            @PathVariable Long companyId
+//    ){
+//        Course course = courseRepository.findById(courseId);
+//        Company company = companyRepository.findById(companyId);
+//        course.assignCompany(company);
+//        courseRepository.save(course);
+//        return course;
+//    }
+
 
 
 

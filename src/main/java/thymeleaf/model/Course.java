@@ -30,13 +30,18 @@ public class Course {
     @ManyToMany(mappedBy = "courses")
     private List<Group> group;
 
-    public Course(Long id, String courseName, Date duration) {
+    public Course(Long id, String courseName, Date duration,Company company) {
         this.id = id;
         this.courseName = courseName;
         this.duration = duration;
+        this.company = company;
     }
 
     public Course() {
 
+    }
+
+    public void assignCompany(Company company){
+        this.company = company;
     }
 }

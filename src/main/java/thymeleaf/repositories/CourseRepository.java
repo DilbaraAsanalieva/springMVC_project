@@ -1,6 +1,7 @@
 package thymeleaf.repositories;
 
 import org.springframework.stereotype.Repository;
+import thymeleaf.model.Company;
 import thymeleaf.model.Course;
 
 import javax.persistence.EntityManager;
@@ -49,4 +50,4 @@ public class CourseRepository {
 
 
 
-    }
+}

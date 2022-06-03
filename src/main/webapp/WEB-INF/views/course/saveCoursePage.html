@@ -7,7 +7,7 @@
 </head>
 <body>
 <form action="#"
-      th:action="@{/api/courses/save}"
+      th:action="@{'/api/courses/save'}"
       method="post"
       th:object="${emptyCourse}">
 
@@ -17,6 +17,21 @@
 
     <label for="address">duration</label>
     <input id="address" type="date" th:field="${emptyCourse.duration}" placeholder="example">
+    <br><br>
+
+
+<!--    <a th:href="@{/api/courses/{courseId}/courses/{companyId}}">-->
+    <label >Choose a company</label>
+    <label>
+        <select th:field="*{company}">
+            <option th:each="company:${companyList}"
+                    th:value="${company.getId()}"
+                    th:text="${company.getCompanyName()}">
+            </option>
+        </select>
+    </label>
+    <!--    </a>-->
+
     <br><br>
 
     <button type="submit">save</button>

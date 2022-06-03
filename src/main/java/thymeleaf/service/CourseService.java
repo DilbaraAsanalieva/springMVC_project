@@ -2,7 +2,9 @@ package thymeleaf.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import thymeleaf.model.Company;
 import thymeleaf.model.Course;
+import thymeleaf.repositories.CompanyRepository;
 import thymeleaf.repositories.CourseRepository;
 
 import javax.persistence.EntityManager;
@@ -13,6 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 public class CourseService {
     private final CourseRepository courseRepository;
+    private final CompanyRepository companyRepository;
     private final EntityManagerFactory entityManagerFactory;
 
 
@@ -22,9 +25,12 @@ public class CourseService {
     }
 
     public void save(Course course) {
-        System.out.println(course.getCourseName());
+
+
+
+
         courseRepository.save(course);
-        System.out.println("Course successfully saved!");
+
     }
 
 
@@ -53,10 +59,11 @@ public class CourseService {
     public void update(long id,Course course){
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
-        entityManager.createQuery("update Course c set c.courseName=?1, c.duration=?2 where c.id=?3")
+        entityManager.createQuery("update Course c set c.courseName=?1, c.duration=?2,c.company=?3 where c.id=?4")
                 .setParameter(1,course.getCourseName())
                 .setParameter(2,course.getDuration())
-                .setParameter(3,id)
+                .setParameter(3,course.getCompany())
+                .setParameter(4,id)
                 .executeUpdate();
         entityManager.getTransaction().commit();
         entityManager.close();
