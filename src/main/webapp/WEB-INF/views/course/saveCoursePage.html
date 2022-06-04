@@ -23,10 +23,10 @@
 <!--    <a th:href="@{/api/courses/{courseId}/courses/{companyId}}">-->
     <label >Choose a company</label>
     <label>
-        <select th:field="*{company}">
+        <select th:field="*{companyId}">
             <option th:each="company:${companyList}"
                     th:value="${company.getId()}"
-                    th:text="${company.getCompanyName()}">
+                    th:text="${company.companyName}">
             </option>
         </select>
     </label>

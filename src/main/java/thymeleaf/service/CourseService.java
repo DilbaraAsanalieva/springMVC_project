@@ -24,12 +24,13 @@ public class CourseService {
         return courseRepository.findAll();
     }
 
-    public void save(Course course) {
 
-
-
-
-        courseRepository.save(course);
+    public void save(Long companyId,Course course) {
+        System.out.println("WORKING???????");
+        Company company = companyRepository.findById(companyId);
+        course.setCompany(company);
+        company.setCourse(course);
+       courseRepository.save(course);
 
     }
 
@@ -70,6 +71,10 @@ public class CourseService {
 
     }
 
+
+    public List<Course> getAll(Long id) {
+        return courseRepository.getAll(id);
+    }
 
 
 }

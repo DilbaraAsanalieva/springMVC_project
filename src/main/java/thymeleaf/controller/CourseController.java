@@ -22,24 +22,23 @@ public class CourseController {
     private final CourseRepository courseRepository;
     private final CompanyRepository companyRepository;
 
-    @ModelAttribute("/courseList")
+    @ModelAttribute("courseList")
     public List<Course> findAllCourses() {
         return courseService.findAllCourses();
     }
 
     @GetMapping
-    public String findAll(Model model) {
-        model.addAttribute("allCourse",courseService.findAllCourses());
+    public String findAll() {
+//        model.addAttribute("allCourse",courseService.findAllCourses());
         return "course/allCourses";
     }
 
 
     @GetMapping("/save")
-    public String saveCoursePage(Model model) {
-
+    public String saveCoursePage( Model model) {
+        System.out.println("WORKSSSSSSSSSSSSSSSSSSSSSS");
         model.addAttribute(
                 "emptyCourse", new Course());
-
 
         return "course/saveCoursePage";
     }
@@ -47,9 +46,7 @@ public class CourseController {
     @PostMapping("/save")
     public String saveCourse(Course course) {
 
-        System.out.println(course);
-
-        courseService.save(course);
+        courseService.save(course.getCompanyId(),course);
 
         return "redirect:/api/courses";
     }

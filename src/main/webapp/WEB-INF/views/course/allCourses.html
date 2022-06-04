@@ -16,21 +16,18 @@
     <tr>
         <th>id</th>
         <th>name</th>
-        <br>
         <th>duration</th>
         <th>operations</th>
         <th>company</th>
     </thead>
     <tbody>
-    <tr th:each="course : ${allCourse}">
-        <td th:text="${course.id}"></td>
-        <td th:text="${course.courseName}"></td>
-        <td th:text="${course.duration}"></td>
-        <td th:text="${course.getCompany()}"></td>
+    <tr th:each="course : ${courseList}">
+        <td th:text="${course.getId()}"></td>
+        <td th:text="${course.getCourseName()}"></td>
+        <td th:text="${course.getDuration()}"></td>
+        <td th:text="${course.getCompany().getCompanyName()}"></td>
         <td>
-            <a th:href="@{'/api/courses/find/by/' + ${course.id}}">
-                <button><a href="https://google.com" >students</a></button>
-            </a>
+
             <a th:href="@{'/api/courses/delete/' + ${course.id}}">
 
                 <button>delete</button>

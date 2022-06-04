@@ -31,7 +31,9 @@ public class CourseRepository {
     @Transactional
     public void save(Course course){
 //        entityManager.getTransaction().begin();
+        System.out.println("REPO SAVE");
         entityManager.persist(course);
+        System.out.println(course);
 //        entityManager.getTransaction().commit();
     }
 
@@ -48,6 +50,10 @@ public class CourseRepository {
         return entityManager.find(Course.class,courseId);
     }
 
+    public List<Course> getAll(Long id){
+        return entityManager.createQuery("select c from Course c",Course.class)
+                .getResultList();
+    }
 
 
 }
