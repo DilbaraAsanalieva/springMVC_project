@@ -23,6 +23,22 @@
     <input id="address2" type="date" th:field="${emptyGroup.dateOfFinish}">
     <br><br>
 
+
+
+    <label>Choose a course</label>
+
+    <label>
+        <input type="checkbox" th:field="*{courseId} "
+        th:each="course:${courseList}"
+        th:value="${course.getId()}"
+        th:text="${course.courseName}">
+    </label>
+
+    <br><br>
+
+
+
+
     <button type="submit">save</button>
 </form>
 

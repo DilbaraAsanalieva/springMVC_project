@@ -36,7 +36,6 @@ public class CourseController {
 
     @GetMapping("/save")
     public String saveCoursePage( Model model) {
-        System.out.println("WORKSSSSSSSSSSSSSSSSSSSSSS");
         model.addAttribute(
                 "emptyCourse", new Course());
 

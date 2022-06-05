@@ -4,7 +4,9 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import thymeleaf.model.Course;
 import thymeleaf.model.Group;
+import thymeleaf.service.CourseService;
 import thymeleaf.service.GroupService;
 
 import java.util.List;
@@ -14,10 +16,16 @@ import java.util.List;
 @Controller
 public class GroupController {
     private final GroupService groupService;
+    private final CourseService courseService;
 
     @ModelAttribute("/groupList")
     public List<Group> findAllGroups() {
         return groupService.findAllGroups();
+    }
+
+    @ModelAttribute("courseList")
+    public List<Course> findAllCourses(){
+        return courseService.findAllCourses();
     }
 
     @GetMapping

@@ -17,8 +17,9 @@
         <th>id</th>
         <th>name</th>
         <th>duration</th>
-        <th>operations</th>
         <th>company</th>
+        <th>operations</th>
+
     </thead>
     <tbody>
     <tr th:each="course : ${courseList}">
@@ -36,10 +37,6 @@
                 <button>update </button>
             </a>
 
-
-            <a th:href="@{'/api/company/save/'}">
-                <button>add company </button>
-            </a>
 
         </td>
     </tr>

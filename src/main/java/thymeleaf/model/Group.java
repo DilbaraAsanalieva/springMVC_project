@@ -25,4 +25,6 @@ public class Group {
     private List<Course> courses;
     @OneToMany(mappedBy = "group")
     private List<Student> students;
+    @Transient
+    private Long courseId;
 }

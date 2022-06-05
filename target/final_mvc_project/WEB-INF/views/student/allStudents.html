@@ -11,16 +11,18 @@
     <thead>
     <tr>
         <th>id</th>
-        <th>name</th>
         <th>firstName</th>
         <th>lastName</th>
+        <th>study format</th>
         <th>email</th>
+        <th>operations</th>
     </thead>
     <tbody>
     <tr th:each="student : ${allStudents}">
         <td th:text="${student.id}"></td>
         <td th:text="${student.firstName}"></td>
         <td th:text="${student.lastName}"></td>
+        <td th:text="${student.studyFormat}"></td>
         <td th:text="${student.email}"></td>
         <td>
             <a th:href="@{'/api/student/delete/' + ${student.id}}">
