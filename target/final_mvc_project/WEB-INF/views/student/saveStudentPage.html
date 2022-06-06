@@ -29,6 +29,18 @@
     <label for="offlineFormat">offline</label>
     <br><br>
 
+    <label >Choose a group</label>
+    <label>
+        <select th:field="*{groupId}">
+            <option th:each="group:${groupList}"
+                    th:value="${group.getId()}"
+                    th:text="${group.groupName}">
+            </option>
+        </select>
+    </label>
+
+    <br><br>
+
     <button type="submit">save</button>
 </form>
 

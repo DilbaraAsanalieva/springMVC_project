@@ -30,4 +30,13 @@ public class GroupRepository {
         entityManager.persist(group);
 //        entityManager.getTransaction().commit();
     }
+
+    public Group findById(long groupId){
+        return entityManager.find(Group.class,groupId);
+    }
+
+    public List<Group> getAll(Long id){
+        return entityManager.createQuery("select g from Group g",Group.class)
+                .getResultList();
+    }
 }

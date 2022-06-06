@@ -21,17 +21,17 @@
     </div>
     <br><br>
 
-<!--    <label >Choose a company</label>-->
-<!--    <label>-->
-<!--        <select th:field="*{companyId}">-->
-<!--            <option th:each="company:${companyList}"-->
-<!--                    th:value="${company.getId()}"-->
-<!--                    th:text="${company.companyName}">-->
-<!--            </option>-->
-<!--        </select>-->
-<!--    </label>-->
+    <label >Choose a company</label>
+    <label>
+        <select th:field="*{companyId}">
+            <option th:each="company:${companyList}"
+                    th:value="${company.getId()}"
+                    th:text="${company.companyName}">
+            </option>
+        </select>
+    </label>
 
-<!--    <br><br>-->
+    <br><br>
 
     <input type="submit" value="update"/>
 

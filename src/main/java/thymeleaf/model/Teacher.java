@@ -17,5 +17,6 @@ public class Teacher {
    private String lastName;
    @OneToOne
     private Course course;
-
+   @Transient
+    private Long courseId;
 }

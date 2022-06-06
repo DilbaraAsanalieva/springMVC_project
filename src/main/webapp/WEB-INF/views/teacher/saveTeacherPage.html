@@ -23,6 +23,20 @@
     <input id="address2" type="text" th:field="${emptyTeacher.email}">
     <br><br>
 
+    <label >Choose a course</label>
+    <label>
+        <select th:field="*{courseId}">
+            <option th:each="course:${courseList}"
+                    th:value="${course.getId()}"
+                    th:text="${course.courseName}">
+            </option>
+        </select>
+    </label>
+
+    <br><br>
+
+
+
     <button type="submit">save</button>
 </form>
 

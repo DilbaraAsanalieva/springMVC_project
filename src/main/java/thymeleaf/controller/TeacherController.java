@@ -5,8 +5,10 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import thymeleaf.model.Course;
 import thymeleaf.model.Group;
 import thymeleaf.model.Teacher;
+import thymeleaf.service.CourseService;
 import thymeleaf.service.TeacherService;
 
 import java.util.List;
@@ -16,11 +18,17 @@ import java.util.List;
 @AllArgsConstructor
 public class TeacherController {
     private final TeacherService teacherService;
+    private final CourseService courseService;
 
     @ModelAttribute("/teacherList")
 
     public List<Teacher> findAllTeachers(){
         return teacherService.findAllTeachers();
+    }
+
+    @ModelAttribute("courseList")
+    public List<Course> findAllCourses(){
+        return courseService.findAllCourses();
     }
 
     @GetMapping
@@ -69,7 +77,7 @@ public class TeacherController {
     @PatchMapping("{id}")
     public String update(@ModelAttribute("teacher") Teacher teacher, @PathVariable Long id){
         teacherService.update(id,teacher);
-        return "redirect:/api/group";
+        return "redirect:/api/teacher";
     }
 
 

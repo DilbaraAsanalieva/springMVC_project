@@ -23,6 +23,11 @@
         <td th:text="${group.groupName}"></td>
         <td th:text="${group.dateOfStart}"></td>
         <td th:text="${group.dateOfFinish}"></td>
+<!--        <td th:text="${group.courses}"></td>-->
+        <td th:each="course : ${group.courses}">
+            <p th:text="${course.courseName}"></p>
+        </td>
+
         <td>
             <a th:href="@{'/api/group/delete/' + ${group.id}}">
                 <button>delete</button>
@@ -30,8 +35,6 @@
             <a th:href="@{'/api/group/'+ ${group.id}+'/edit'}">
                 <button>update </button>
             </a>
-
-
         </td>
     </tr>
     </tbody>

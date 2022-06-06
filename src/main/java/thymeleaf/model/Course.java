@@ -46,9 +46,7 @@ public class Course {
 
     }
 
-    public void assignCompany(Company company){
-        this.company = company;
-    }
+
 
 
 

@@ -2,7 +2,9 @@ package thymeleaf.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import thymeleaf.model.Course;
 import thymeleaf.model.Teacher;
+import thymeleaf.repositories.CourseRepository;
 import thymeleaf.repositories.TeacherRepository;
 
 import javax.persistence.EntityManager;
@@ -15,6 +17,7 @@ public class TeacherService {
 
     private final TeacherRepository teacherRepository;
     private final EntityManagerFactory entityManagerFactory;
+    private final CourseRepository courseRepository;
 
     public List<Teacher> findAllTeachers(){
         return teacherRepository.findAll();
@@ -22,7 +25,15 @@ public class TeacherService {
 
     public void save(Teacher teacher) {
         System.out.println(teacher.getFirstName());
+
+        Course course = courseRepository.findById(teacher.getCourseId());
+
+        teacher.setCourse(course);
+
+        course.setTeacher(teacher);
+
         teacherRepository.save(teacher);
+
         System.out.println("Teacher successfully saved!");
     }
 
@@ -46,16 +57,18 @@ public class TeacherService {
     public void update(long id, Teacher teacher){
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
-        entityManager.createQuery("update Teacher t set t.firstName=?1, t.lastName=?2,t.email=?3 where t.id=?4")
+        entityManager.createQuery("update Teacher t set t.firstName=?1, t.lastName=?2,t.email=?3,t.course=?4 where t.id=?5")
                 .setParameter(1,teacher.getFirstName())
                 .setParameter(2,teacher.getLastName())
                 .setParameter(3,teacher.getEmail())
-                .setParameter(4,id)
+                .setParameter(4,teacher.getCourseId())
+                .setParameter(5,id)
                 .executeUpdate();
         entityManager.getTransaction().commit();
         entityManager.close();
 
     }
+
 
 
 }

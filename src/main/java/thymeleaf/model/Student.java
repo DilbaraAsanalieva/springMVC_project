@@ -19,9 +19,10 @@ public class Student {
     private String email;
     @Enumerated(EnumType.STRING)
     private StudyFormat studyFormat;
-
     @ManyToOne
     private Group group;
+    @Transient
+    private Long groupId;
 
     @Override
     public String toString() {

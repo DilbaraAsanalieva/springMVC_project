@@ -2,11 +2,15 @@ package thymeleaf.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import thymeleaf.model.Course;
 import thymeleaf.model.Group;
+import thymeleaf.repositories.CourseRepository;
 import thymeleaf.repositories.GroupRepository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -14,14 +18,18 @@ import java.util.List;
 public class GroupService {
     private final GroupRepository groupRepository;
     private final EntityManagerFactory entityManagerFactory;
+    private final CourseRepository courseRepository;
 
     public List<Group> findAllGroups() {
         return groupRepository.findAll();
     }
 
-    public void save(Group group) {
-        System.out.println(group.getGroupName());
+    public void save(Long courseId, Group group) { //LIST COURSESID
+        Course course = courseRepository.findById(courseId);
+        group.setCourses(Collections.singletonList(course)); //without set
+        course.setGroup(Collections.singletonList(group));
         groupRepository.save(group);
+//        Syst em.out.println(group.getGroupName());
         System.out.println("Group successfully saved!");
     }
 

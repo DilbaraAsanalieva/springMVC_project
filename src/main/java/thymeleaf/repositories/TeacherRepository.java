@@ -23,7 +23,7 @@ public class TeacherRepository {
     }
 
     @Transactional
-    public void save(Teacher teacher){
+    public void save(Teacher teacher) {
         entityManager.persist(teacher);
     }
 }

@@ -2,7 +2,9 @@ package thymeleaf.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import thymeleaf.model.Group;
 import thymeleaf.model.Student;
+import thymeleaf.repositories.GroupRepository;
 import thymeleaf.repositories.StudentRepository;
 
 import javax.persistence.EntityManager;
@@ -14,10 +16,15 @@ import java.util.List;
 public class StudentService {
     private final StudentRepository studentRepository;
     private final EntityManagerFactory entityManagerFactory;
+//    private final GroupRepository groupRepository;
 
     public List<Student> findAllStudents() {
         return studentRepository.findAll();
     }
+
+//    public List<Group> findAllGroups() {
+//        return groupRepository.findAll();
+//    }
 
     public void save(Student student){
         studentRepository.save(student);

@@ -28,7 +28,7 @@
     <label>Choose a course</label>
 
     <label>
-        <input type="checkbox" th:field="*{courseId} "
+        <input type="checkbox" th:field="*{courseId} ">   <!-- to coursesID -->
         th:each="course:${courseList}"
         th:value="${course.getId()}"
         th:text="${course.courseName}">
@@ -43,7 +43,7 @@
 </form>
 
 <div>
-    <a th:href="@{/api/group}">
+    <a th:href="@{/}">
         <button>go back</button>
     </a>
 </div>
