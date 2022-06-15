@@ -1,39 +1,49 @@
 package thymeleaf.model;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 import javax.persistence.*;
 
 @Entity
 @Setter@Getter
+@NoArgsConstructor
 @Table(name = "students")
 public class Student {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+
+//    @Id
+//    @SequenceGenerator(
+//            name = "student_sequence",
+//            sequenceName = "student_sequence",
+//            allocationSize = 1
+//    )
+//    @GeneratedValue(
+//            generator = "student_sequence")
+
     private Long id;
     private String firstName;
     private String lastName;
     private String email;
     @Enumerated(EnumType.STRING)
     private StudyFormat studyFormat;
-    @ManyToOne
+
+    @ManyToOne(cascade = CascadeType.MERGE)//,fetch = FetchType.EAGER
     private Group group;
     @Transient
     private Long groupId;
 
-    @Override
-    public String toString() {
-        return "Student{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", studyFormat=" + studyFormat +
-                ", group=" + group +
-                '}';
+
+
+    public Student(String firstName, String lastName, String email, StudyFormat studyFormat) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.studyFormat = studyFormat;
+
     }
 }
 

@@ -7,7 +7,7 @@
 </head>
 <body>
 <form action="#"
-      th:action="@{/api/student/{id}(id=${student.id})}"
+      th:action="@{/api/student/{id}(id=${student})}"
       th:method="PATCH"
       th:object="${student}">
 

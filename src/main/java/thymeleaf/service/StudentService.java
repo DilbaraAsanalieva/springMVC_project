@@ -9,28 +9,32 @@ import thymeleaf.repositories.StudentRepository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
+//@PersistenceContext  //???
 @AllArgsConstructor
 public class StudentService {
     private final StudentRepository studentRepository;
     private final EntityManagerFactory entityManagerFactory;
-//    private final GroupRepository groupRepository;
+    private final GroupRepository groupRepository;
 
     public List<Student> findAllStudents() {
         return studentRepository.findAll();
     }
 
-//    public List<Group> findAllGroups() {
-//        return groupRepository.findAll();
-//    }
 
-    public void save(Student student){
-        studentRepository.save(student);
+
+    @Transactional
+    public void save(Long groupId,Student student){
+        System.out.println("WORKS?");
+        Group group = groupRepository.findById(groupId);
+        group.setStudent(student);
+        student.setGroup(group);
+//        studentRepository.save(student); //
         System.out.println("Student successfully saved!");
     }
-
 
     public void deleteById(Long studentId) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();

@@ -4,11 +4,11 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import thymeleaf.model.Company;
 import thymeleaf.model.Course;
 import thymeleaf.model.Group;
 import thymeleaf.service.CourseService;
 import thymeleaf.service.GroupService;
+import thymeleaf.service.StudentService;
 
 import java.util.List;
 
@@ -18,6 +18,7 @@ import java.util.List;
 public class GroupController {
     private final GroupService groupService;
     private final CourseService courseService;
+    private final StudentService studentService;
 
     @ModelAttribute("/groupList")
     public List<Group> findAllGroups() {
@@ -35,30 +36,16 @@ public class GroupController {
         return "group/allGroups";
     }
 
-//        @GetMapping
-//    public String findAll(@RequestParam(value = "groupName",required = false) String groupName,
-//                          @RequestParam(value = "courses", required = false ) Course courseName,
-//                          @RequestParam  Model model) {
-//        model.addAttribute("allGroups",groupService.findAllGroups());
-//        return "group/allGroups";
-//    }
 
     @GetMapping("/save")
-    public String saveGroupPage(Model model) {
-
-        model.addAttribute(
-                "emptyGroup", new Group());
-
+    public String saveGroupPage( Model model) {
+        model.addAttribute("emptyGroup", new Group());
         return "group/saveGroupPage";
     }
 
     @PostMapping("/save")
-    public String saveGroup(Group group) {
-
-        System.out.println(group);
-
-        groupService.save(group.getCourseId(), group);
-
+        public String saveGroup(Group group) {
+        groupService.save(group,group.getCourseId());
         return "redirect:/api/group";
     }
 

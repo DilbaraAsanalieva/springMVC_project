@@ -3,7 +3,6 @@ package thymeleaf.service;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import thymeleaf.model.Company;
-import thymeleaf.model.Course;
 import thymeleaf.repositories.CompanyRepository;
 
 //import javax.persistence.EntityManagerFactory;

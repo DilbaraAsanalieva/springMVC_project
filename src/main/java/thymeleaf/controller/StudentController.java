@@ -1,23 +1,26 @@
 package thymeleaf.controller;
 
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import thymeleaf.model.Group;
 import thymeleaf.model.Student;
-import thymeleaf.repositories.GroupRepository;
 import thymeleaf.service.GroupService;
 import thymeleaf.service.StudentService;
-
 import java.util.List;
 
+
 @Controller
-@AllArgsConstructor
+
 @RequestMapping("/api/student")
 public class StudentController {
     public final StudentService studentService;
     private final GroupService groupService;
+
+    public StudentController(StudentService studentService, GroupService groupService) {
+        this.studentService = studentService;
+        this.groupService = groupService;
+    }
 
     @ModelAttribute("/studentList")
     public List<Student> findAllStudents() {
@@ -45,10 +48,13 @@ public class StudentController {
 
         System.out.println(student);
 
-        studentService.save(student);
+        studentService.save(student.getGroupId(),student);
 
         return "redirect:/api/student";
     }
+
+
+
 
     @GetMapping("/{id}")
     public String findById(@PathVariable("id")Long id, Model model){
@@ -74,7 +80,6 @@ public class StudentController {
         studentService.update(id,student);
         return "redirect:/api/student";
     }
-
 
     @ModelAttribute("groupList")
     public List<Group> findAllGroups(){

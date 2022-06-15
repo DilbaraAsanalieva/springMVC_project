@@ -7,8 +7,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import static javax.persistence.CascadeType.*;
 
 @Entity
 @Setter@Getter
@@ -17,23 +20,40 @@ import java.util.List;
 public class Course {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(
+            name = "course_sequence",
+            sequenceName = "course_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            generator = "course_sequence")
+
     private Long id;
     private String courseName;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date duration;
 
-    @ManyToMany(mappedBy = "courses")
-    private List<Group> groups;
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne//(cascade = {DETACH,REFRESH,MERGE})    //(cascade = {CascadeType.MERGE})//(cascade = {CascadeType.PERSIST,CascadeType.DETACH,CascadeType.MERGE}) ,CascadeType.REFRESH,CascadeType.DETACH
     private Company company;
-    @OneToOne(mappedBy = "course")
+
+    @OneToOne(mappedBy = "course",cascade = {REMOVE}, orphanRemoval = true ,fetch = FetchType.EAGER)//EAGER
     private Teacher teacher;
-    @ManyToMany(mappedBy = "courses")
-    private List<Group> group;
+
+    //@OneToOne(mappedBy = "course",
+    //            cascade = {REMOVE},
+    //            orphanRemoval = true)
+    //    private Teacher teacher;
+
+
+    @OneToMany(mappedBy = "course",cascade = {DETACH, MERGE, REFRESH},
+            orphanRemoval = true,fetch = FetchType.EAGER)//fetch = FetchType.EAGER without delete
+    private List<Group> groups = new ArrayList<>();
 
     @Transient
     private Long companyId;
+
+    @Transient
+    private Long groupId;
 
     public Course(Long id, String courseName, Date duration,Company company) {
         this.id = id;
@@ -44,6 +64,9 @@ public class Course {
 
     public Course() {
 
+    }
+    public void setGroup(Group group){
+        this.groups.add(group);
     }
 
 

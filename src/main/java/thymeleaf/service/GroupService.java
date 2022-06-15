@@ -9,8 +9,6 @@ import thymeleaf.repositories.GroupRepository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -24,12 +22,13 @@ public class GroupService {
         return groupRepository.findAll();
     }
 
-    public void save(Long courseId, Group group) { //LIST COURSESID
-        Course course = courseRepository.findById(courseId);
-        group.setCourses(Collections.singletonList(course)); //without set
-        course.setGroup(Collections.singletonList(group));
+    public void save(Group group,Long coursesId) { //LIST COURSESID
+        System.out.println("WORKING?????");
+        Course course = courseRepository.findById(coursesId);
+        group.setCourse(course); //without set
+        course.setGroup(group);
         groupRepository.save(group);
-//        Syst em.out.println(group.getGroupName());
+//        System.out.println(group.getGroupName());
         System.out.println("Group successfully saved!");
     }
 
@@ -53,18 +52,28 @@ public class GroupService {
     }
 
     public void update(long id, Group group){
+//        groupRepository.updateGroup(id,group);
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
-        entityManager.createQuery("update Group g set g.groupName=?1, g.dateOfStart=?2,g.dateOfFinish=?3 where g.id=?4")
+        entityManager.createQuery("update Group g set g.groupName=?1, g.dateOfStart=?2,g.dateOfFinish=?3,g.course=?4 where g.id=?5")
                 .setParameter(1,group.getGroupName())
                 .setParameter(2,group.getDateOfStart())
                 .setParameter(3,group.getDateOfFinish())
-                .setParameter(4,id)
+                .setParameter(4,group.getCourse())
+                .setParameter(5,id)
                 .executeUpdate();
+
         entityManager.getTransaction().commit();
         entityManager.close();
-
+//        Group group1 = groupRepository.findById(id);
+//        group1.setGroupName(group.getGroupName());
+//        group1.setCourse(group.getCourse());
+//        groupRepository.updateGroup(id,group);
     }
+
+//    public Group show(long id){
+//        return groupRepository.show(id);
+//    }
 
 
 

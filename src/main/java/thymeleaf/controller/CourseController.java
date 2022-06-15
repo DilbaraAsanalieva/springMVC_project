@@ -5,8 +5,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import thymeleaf.model.Company;
 import thymeleaf.model.Course;
-import thymeleaf.repositories.CompanyRepository;
-import thymeleaf.repositories.CourseRepository;
 import thymeleaf.service.CompanyService;
 import thymeleaf.service.CourseService;
 
@@ -19,8 +17,6 @@ public class CourseController {
 
     private final CourseService courseService;
     private final CompanyService companyService;
-    private final CourseRepository courseRepository;
-    private final CompanyRepository companyRepository;
 
     @ModelAttribute("courseList")
     public List<Course> findAllCourses() {
@@ -70,9 +66,9 @@ public class CourseController {
         return "course/editCourse";
     }
 
-    @PatchMapping("{id}")
+    @PatchMapping("/{id}")
     public String update(@ModelAttribute("course")Course course,@PathVariable Long id){
-        courseService.update(id,course);
+        courseService.update(course,id);
         return "redirect:/api/courses";
     }
 
@@ -81,18 +77,7 @@ public class CourseController {
         return companyService.findAllCompanies();
     }
 
-//
-//    @PostMapping("/{courseId}/courses/{companyId}")
-//    Course assignCompanyToCourse(
-//            @PathVariable Long courseId,
-//            @PathVariable Long companyId
-//    ){
-//        Course course = courseRepository.findById(courseId);
-//        Company company = companyRepository.findById(companyId);
-//        course.assignCompany(company);
-//        courseRepository.save(course);
-//        return course;
-//    }
+
 
 
 

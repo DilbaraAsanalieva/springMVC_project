@@ -3,12 +3,14 @@ package thymeleaf.service;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import thymeleaf.model.Course;
+import thymeleaf.model.Student;
 import thymeleaf.model.Teacher;
 import thymeleaf.repositories.CourseRepository;
 import thymeleaf.repositories.TeacherRepository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -23,6 +25,7 @@ public class TeacherService {
         return teacherRepository.findAll();
     }
 
+    @Transactional
     public void save(Teacher teacher) {
         System.out.println(teacher.getFirstName());
 
@@ -36,6 +39,10 @@ public class TeacherService {
 
         System.out.println("Teacher successfully saved!");
     }
+
+//    public void deleteById(Long teacherId) {
+//        teacherRepository.deleteById(teacherId);
+//    }
 
     public void deleteById(Long teacherId) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
