@@ -56,19 +56,20 @@ public class CourseRepository {
 
     }
 
-    public void update(Course course,long courseId){
+    public void update(Course course){
+        entityManager.merge(course);
 
-        entityManager.getTransaction().begin();
-
-        Course course1 = show(courseId);
-
-        course1.setCourseName(course.getCourseName());
-
-        course1.setDuration(course.getDuration());
-
-        course1.setCompany(course.getCompany());
-
-        entityManager.getTransaction().commit();
+//        entityManager.getTransaction().begin();
+//
+//        Course course1 = show(courseId);
+//
+//        course1.setCourseName(course.getCourseName());
+//
+//        course1.setDuration(course.getDuration());
+//
+//        course1.setCompany(course.getCompany());
+//
+//        entityManager.getTransaction().commit();
 
     }
 

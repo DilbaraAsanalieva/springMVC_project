@@ -64,12 +64,11 @@ public class TeacherService {
     public void update(long id, Teacher teacher){
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
-        entityManager.createQuery("update Teacher t set t.firstName=?1, t.lastName=?2,t.email=?3,t.course=?4 where t.id=?5")
+        entityManager.createQuery("update Teacher t set t.firstName=?1, t.lastName=?2,t.email=?3 where t.id=?4")
                 .setParameter(1,teacher.getFirstName())
                 .setParameter(2,teacher.getLastName())
                 .setParameter(3,teacher.getEmail())
-                .setParameter(4,teacher.getCourseId())
-                .setParameter(5,id)
+                .setParameter(4,id)
                 .executeUpdate();
         entityManager.getTransaction().commit();
         entityManager.close();

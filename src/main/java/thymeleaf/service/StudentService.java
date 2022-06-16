@@ -13,7 +13,6 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
-//@PersistenceContext  //???
 @AllArgsConstructor
 public class StudentService {
     private final StudentRepository studentRepository;
@@ -23,8 +22,6 @@ public class StudentService {
     public List<Student> findAllStudents() {
         return studentRepository.findAll();
     }
-
-
 
     @Transactional
     public void save(Long groupId,Student student){
@@ -47,9 +44,7 @@ public class StudentService {
 
     public Student findById(Long studentId) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-//        entityManager.getTransaction().begin();
         Student student = entityManager.createQuery("select s from Student s where s.id=?1", Student.class).setParameter(1, studentId).getSingleResult();
-//        entityManager.getTransaction().commit();
         entityManager.close();
         return  student;
     }
@@ -57,12 +52,11 @@ public class StudentService {
     public void update(long id, Student student){
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
-        entityManager.createQuery("update Student s set s.firstName=?1, s.lastName=?2,s.email=?3,s.studyFormat=?4 where s.id=?5")
+        entityManager.createQuery("update Student s set s.firstName=?1, s.lastName=?2,s.email=?3 where s.id=?4")
                 .setParameter(1,student.getFirstName())
                 .setParameter(2,student.getLastName())
                 .setParameter(3,student.getEmail())
-                .setParameter(4,student.getStudyFormat())
-                .setParameter(5,id)
+                .setParameter(4,id)
                 .executeUpdate();
         entityManager.getTransaction().commit();
         entityManager.close();

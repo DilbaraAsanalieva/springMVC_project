@@ -32,10 +32,6 @@ public class TeacherRepository {
         entityManager.persist(teacher);
     }
 
-//    public void deleteById(Long teacherId) {
-//        entityManager.createQuery("delete from Teacher t where t.id = :id")
-//                .setParameter("id", teacherId).executeUpdate();
-//    }
 
     public void deleteById(long teacherId){
 
@@ -51,29 +47,27 @@ public class TeacherRepository {
     }
 
 
-//    List<Teacher> teachers =new ArrayList<>();
+    List<Teacher> teachers =new ArrayList<>();
 
 
-//
-//    public Teacher show(long id) {
-//        return teachers.stream().filter(teacher -> teacher.getId() == id).findAny().orElse(null);
-//
-//    }
-//
-//    public void update(Teacher teacher,long teacherId){
-//
-//        entityManager.getTransaction().begin();
-//
-//        Teacher teacher1 = show(teacherId);
-//
-//        teacher1.setFirstName(course.getCourseName());
-//
-//        course1.setDuration(course.getDuration());
-//
-//        course1.setCompany(course.getCompany());
-//
-//        entityManager.getTransaction().commit();
-//
-//    }
+    public void update(Teacher teacher,long teacherId){
+
+        entityManager.getTransaction().begin();
+
+        Teacher teacher1 = show(teacherId);
+
+        teacher1.setFirstName(teacher.getFirstName());
+
+        teacher1.setLastName(teacher.getLastName());
+
+        teacher1.setEmail(teacher.getEmail());
+
+        entityManager.getTransaction().commit();
+
+    }
+    public Teacher show(long id) {
+        return teachers.stream().filter(teacher -> teacher.getId() == id).findAny().orElse(null);
+
+    }
 
 }

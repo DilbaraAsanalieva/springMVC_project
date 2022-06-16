@@ -26,18 +26,7 @@
     <div>
         <input id="address" type="date" th:field="${group.dateOfFinish}">
     </div>
-    <br><br>
-    <div >
-        <label >Choose a course</label>
-        <label>
-            <select th:field="*{courseId}">
-                <option th:each="course:${courseList}"
-                        th:value="${course.getId()}"
-                        th:text="${course.courseName}">
-                </option>
-            </select>
-        </label>
-    </div>
+
     <br><br>
 
 

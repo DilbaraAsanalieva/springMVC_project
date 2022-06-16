@@ -33,20 +33,15 @@ public class Course {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date duration;
 
-    @ManyToOne//(cascade = {DETACH,REFRESH,MERGE})    //(cascade = {CascadeType.MERGE})//(cascade = {CascadeType.PERSIST,CascadeType.DETACH,CascadeType.MERGE}) ,CascadeType.REFRESH,CascadeType.DETACH
+    @ManyToOne
     private Company company;
 
-    @OneToOne(mappedBy = "course",cascade = {REMOVE}, orphanRemoval = true ,fetch = FetchType.EAGER)//EAGER
+    @OneToOne(mappedBy = "course",cascade = {REMOVE}, orphanRemoval = true ,fetch = FetchType.EAGER)
     private Teacher teacher;
-
-    //@OneToOne(mappedBy = "course",
-    //            cascade = {REMOVE},
-    //            orphanRemoval = true)
-    //    private Teacher teacher;
 
 
     @OneToMany(mappedBy = "course",cascade = {DETACH, MERGE, REFRESH},
-            orphanRemoval = true,fetch = FetchType.EAGER)//fetch = FetchType.EAGER without delete
+            orphanRemoval = true,fetch = FetchType.EAGER)
     private List<Group> groups = new ArrayList<>();
 
     @Transient

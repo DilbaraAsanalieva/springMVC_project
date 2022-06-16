@@ -1,11 +1,11 @@
 package thymeleaf.repositories;
 
 import org.springframework.stereotype.Repository;
+import thymeleaf.model.Group;
 import thymeleaf.model.Student;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +26,6 @@ public class StudentRepository {
     }
 
     List<Student> students = new ArrayList<Student>();
-
 
 
     public List<Student> findAll(){
@@ -55,7 +54,7 @@ public class StudentRepository {
 
     }
 
-    public void update(Student student,long studentId){
+    public void update(long studentId,Student student){
 
         entityManager.getTransaction().begin();
 
@@ -66,9 +65,6 @@ public class StudentRepository {
         student1.setLastName(student.getLastName());
 
         student1.setEmail(student.getEmail());
-
-        student1.setStudyFormat(student.getStudyFormat());
-
 
         entityManager.getTransaction().commit();
 
@@ -82,10 +78,5 @@ public class StudentRepository {
 
         entityManager.getTransaction().commit();
     }
-
-
-
-
-
 
 }

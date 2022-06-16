@@ -62,7 +62,11 @@ public class CourseService {
 //    }
 
     public void update(Course course, long courseId) {
-        courseRepository.update(course, courseId);
+        Course course1 = findById(courseId);
+        course1.setCourseName(course.getCourseName());
+        course1.setDuration(course.getDuration());
+//        course1.setCompany(course.getCompany());
+        courseRepository.update(course1);
     }
 
 
